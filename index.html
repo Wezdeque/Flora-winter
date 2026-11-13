@@ -1,0 +1,1730 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111423">
+  <meta name="description" content="Зимний выезд FLORA в Хибины, 24–29 января 2027. Кировск, BigWood, горы и программа с резидентами FLORA.">
+  <title>FLORA в Хибинах — 24–29 января 2027</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Onest:wght@400;500;600;700;800&display=swap');
+
+    /* ==========================================================================
+       1. ПЕРЕМЕННЫЕ И БАЗОВЫЕ НАСТРОЙКИ
+       ========================================================================== */
+    :root {
+      --ink: #f7f5f2;
+      --muted: #b9b9c4;
+      --bg: #10121d;
+      --panel: rgba(255, 255, 255, 0.065);
+      --line: rgba(255, 255, 255, 0.13);
+      --accent: #f4f1e9;
+      --violet: #f4f1e9;
+      --glow: rgba(222, 226, 237, 0.16);
+      --hero: url('khibiny-hero.png');
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Onest', sans-serif;
+      line-height: 1.5;
+      transition: background 0.35s, color 0.35s;
+    }
+
+    body[data-mood="aurora"] {
+      --bg: #111425;
+      --accent: #f7f8fa;
+      --violet: #f7f8fa;
+      --glow: rgba(222, 230, 242, 0.18);
+    }
+
+    body[data-mood="morning"] {
+      --bg: #171820;
+      --accent: #f4f1e9;
+      --violet: #f4f1e9;
+      --glow: rgba(235, 230, 220, 0.16);
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1, h2, h3 {
+      font-family: 'DM Serif Display', serif;
+      font-weight: 400;
+      letter-spacing: -0.025em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .wrap {
+      width: min(1160px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* ==========================================================================
+       2. ВЕРХНЯЯ НАВИГАЦИЯ (TOPBAR)
+       ========================================================================== */
+    .topbar {
+      position: fixed;
+      z-index: 20;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1160px, calc(100% - 28px));
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(18, 19, 31, 0.57);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 12px 42px #0003;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .brand img {
+      display: block;
+      width: 118px;
+      height: auto;
+      max-height: 46px;
+      object-fit: contain;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 12px;
+      color: #e6e4ea;
+    }
+
+    .nav a:hover {
+      color: var(--accent);
+    }
+
+    .mood {
+      background: #ffffff0c;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 11px;
+      max-width: 155px;
+    }
+
+    /* ==========================================================================
+       3. КНОПКИ И ОБЩИЕ ЭЛЕМЕНТЫ
+       ========================================================================== */
+    .book-mini,
+    .btn {
+      border: 0;
+      border-radius: 99px;
+      background: var(--accent);
+      color: #17131a;
+      padding: 12px 18px;
+      font-weight: 700;
+      font-size: 13px;
+      transition: 0.2s;
+      box-shadow: 0 8px 28px var(--glow);
+    }
+
+    .book-mini:hover,
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.07);
+    }
+
+    .btn-outline {
+      background: #ffffff12;
+      color: white;
+      border: 1px solid #ffffff50;
+      border-radius: 99px;
+      padding: 11px 18px;
+      font-size: 13px;
+      backdrop-filter: blur(8px);
+    }
+
+    .pill {
+      border-radius: 99px;
+      padding: 6px 10px;
+      background: #ffffff12;
+      color: var(--accent);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .kicker {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .section {
+      padding: 108px 0;
+    }
+
+    .section-head {
+      max-width: 690px;
+      margin-bottom: 38px;
+    }
+
+    .section h2 {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.03;
+      margin-bottom: 15px;
+    }
+
+    .lead {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    /* ==========================================================================
+       4. ПЕРВЫЙ ЭКРАН (HERO) И КАРТОЧКА ТАЙМЕРА
+       ========================================================================== */
+    .hero {
+      min-height: 810px;
+      height: 100svh;
+      max-height: 980px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background-image:
+        linear-gradient(180deg, #08091245 0%, #08091224 36%, #0c0d17c2 73%, #10121d 100%),
+        var(--hero);
+      background-size: cover;
+      background-position: center 44%;
+    }
+
+    .hero:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 69% 25%, transparent 10%, #090b1640 80%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 150px 0 70px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 45px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      font-size: clamp(52px, 8vw, 104px);
+      line-height: 0.94;
+      margin: 16px 0 21px;
+      max-width: 760px;
+    }
+
+    .hero h1 em {
+      font-family: 'DM Serif Display', serif;
+      font-style: normal;
+      font-weight: 400;
+      color: var(--accent);
+    }
+
+    .hero-copy {
+      max-width: 560px;
+      color: #e1deeb;
+      font-size: 17px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 27px;
+    }
+
+    .hero-card {
+      background: rgba(20, 21, 33, 0.55);
+      backdrop-filter: blur(20px);
+      border: 1px solid #ffffff2e;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 22px 80px #0004;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #d9d6e0;
+      font-size: 12px;
+    }
+
+    .countdown {
+      display: flex;
+      gap: 10px;
+      margin: 23px 0;
+    }
+
+    .unit {
+      flex: 1;
+      text-align: center;
+      padding: 11px 5px;
+      background: #ffffff0a;
+      border: 1px solid #ffffff15;
+      border-radius: 14px;
+    }
+
+    .unit strong {
+      display: block;
+      font: 700 28px Onest;
+    }
+
+    .unit small {
+      font-size: 9px;
+      text-transform: uppercase;
+      color: #bbb8c4;
+      letter-spacing: 0.1em;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      border-top: 1px solid #ffffff1c;
+      padding-top: 18px;
+    }
+
+    .price-row small {
+      display: block;
+      color: #c8c4d0;
+      font-size: 11px;
+    }
+
+    .price {
+      font: 800 30px Onest;
+      letter-spacing: -0.04em;
+    }
+
+    /* ==========================================================================
+       5. ГАЛЕРЕЯ (ХИБИНЫ В КАДРЕ)
+       ========================================================================== */
+    .gallery-section {
+      padding-top: 55px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .gallery-item {
+      margin: 0;
+      min-width: 0;
+    }
+
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 18px;
+      background: #1b1d2b;
+    }
+
+    .gallery-item figcaption {
+      padding: 12px 3px 0;
+    }
+
+    .gallery-item strong {
+      display: block;
+      font: 400 18px 'DM Serif Display', serif;
+      margin-bottom: 5px;
+    }
+
+    .gallery-item span {
+      display: block;
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    /* ==========================================================================
+       6. ВЕЧЕРНЯЯ ПРОГРАММА FLORA (БАННЕР)
+       ========================================================================== */
+    .evening-section {
+      padding: 75px 0;
+      background: linear-gradient(100deg, #202132, #161823);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .evening-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .evening-layout h2 {
+      font-size: clamp(40px, 5vw, 62px);
+      margin: 0;
+    }
+
+    .evening-copy {
+      max-width: 550px;
+    }
+
+    .evening-copy p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .evening-copy .evening-lead {
+      font-size: 20px;
+      line-height: 1.45;
+      color: var(--ink);
+      font-family: 'DM Serif Display', serif;
+    }
+
+    .evening-copy .btn-outline {
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    /* ==========================================================================
+       7. О ПОЕЗДКЕ, ПРЕИМУЩЕСТВА И КУРОРТ BIGWOOD
+       ========================================================================== */
+    .intro {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .theses {
+      display: grid;
+      gap: 13px;
+    }
+
+    .thesis {
+      padding: 18px;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 16px;
+    }
+
+    .num {
+      font: 600 12px Onest;
+      color: var(--accent);
+      padding-top: 4px;
+    }
+
+    .thesis p {
+      margin: 0;
+      color: #dddbe4;
+      font-size: 15px;
+    }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 13px;
+      margin-top: 38px;
+    }
+
+    .benefit,
+    .activity,
+    .price-card,
+    .info-card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .benefit .icon,
+    .activity .icon {
+      font: 600 11px Onest;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 18px;
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+    }
+
+    .benefit h3 {
+      font-size: 15px;
+      margin-bottom: 7px;
+    }
+
+    .benefit p,
+    .activity p,
+    .info-card p {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .trip-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 25px;
+      border-radius: 20px;
+      background: linear-gradient(100deg, #28243a, #191b2a);
+      border: 1px solid var(--line);
+      margin-bottom: 48px;
+    }
+
+    .trip-date {
+      font: 700 23px Onest;
+    }
+
+    .trip-tag {
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .resort {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .resort h2 {
+      font-size: clamp(38px, 5vw, 62px);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 21px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .stat strong {
+      font: 700 34px Onest;
+      display: block;
+      color: var(--accent);
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin: 24px 0 14px;
+    }
+
+    .tab {
+      border: 1px solid var(--line);
+      background: transparent;
+      border-radius: 99px;
+      padding: 10px 16px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .tab.active {
+      background: var(--accent);
+      color: #17131a;
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+
+    .tab-panel {
+      padding: 23px 25px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 20px;
+      min-height: 118px;
+    }
+
+    .tab-panel h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .tab-panel p {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+
+    /* ==========================================================================
+       8. АКТИВНОСТИ И РАСПИСАНИЕ ПО ДНЯМ
+       ========================================================================== */
+    .activities {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 13px;
+    }
+
+    .activity {
+      min-height: 212px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .activity:after {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: var(--glow);
+      filter: blur(30px);
+      right: -65px;
+      bottom: -70px;
+    }
+
+    .activity h3 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .schedule {
+      display: grid;
+      grid-template-columns: 0.72fr 1.28fr;
+      gap: 48px;
+    }
+
+    .day-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .day {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .day button {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      padding: 17px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .day button strong {
+      font: 700 14px Onest;
+    }
+
+    .day button span {
+      font-size: 11px;
+      color: var(--accent);
+    }
+
+    .day-detail {
+      display: none;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 0 18px 18px;
+    }
+
+    .day.open .day-detail {
+      display: block;
+    }
+
+    .day.open {
+      background: #ffffff0c;
+    }
+
+    /* ==========================================================================
+       9. ЧЕК-ЛИСТ В ДОРОГУ
+       ========================================================================== */
+    .checklist {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .check {
+      display: flex;
+      gap: 11px;
+      align-items: center;
+      padding: 13px;
+      border-radius: 13px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      font-size: 12px;
+      color: #dedce5;
+      cursor: pointer;
+    }
+
+    .check input {
+      accent-color: #f4f1e9;
+      width: 16px;
+      height: 16px;
+    }
+
+    .progress {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .progress b {
+      color: var(--accent);
+    }
+
+    /* ==========================================================================
+       10. СТОИМОСТЬ, ВОЛНЫ БРОНИРОВАНИЯ И СОСТАВ ПАКЕТА
+       ========================================================================== */
+    .pricing {
+      background: linear-gradient(180deg, transparent, #151522 18%, #151522 82%, transparent);
+    }
+
+    .price-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .price-card {
+      padding: 24px;
+      position: relative;
+    }
+
+    .price-card.current {
+      border-color: var(--accent);
+      background: linear-gradient(145deg, #292537, #191a27);
+    }
+
+    .price-card .wave {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .price-card h3 {
+      font-size: 19px;
+      margin: 10px 0;
+    }
+
+    .price-card .amount {
+      font: 800 32px Onest;
+      letter-spacing: -0.04em;
+    }
+
+    .price-card p {
+      color: var(--muted);
+      font-size: 12px;
+      margin: 10px 0 0;
+    }
+
+    .own-way {
+      margin-top: 18px;
+      padding: 22px 25px;
+      border-radius: 20px;
+      border: 1px solid #c0b4ff44;
+      background: #a18eff0c;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .own-way h3 {
+      font-size: 17px;
+      margin: 0 0 4px;
+    }
+
+    .own-way p {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .includes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .include-box {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .include-box h3 {
+      font-size: 16px;
+    }
+
+    .include-box ul {
+      padding: 0;
+      list-style: none;
+      margin: 14px 0 0;
+      display: grid;
+      gap: 9px;
+    }
+
+    .include-box li {
+      color: #dedce5;
+      font-size: 13px;
+    }
+
+    .include-box li:before {
+      content: '↗';
+      color: var(--accent);
+      margin-right: 9px;
+    }
+
+    /* ==========================================================================
+       11. ФИНАЛЬНЫЙ ПРИЗЫВ (CTA) И ФУТЕР
+       ========================================================================== */
+    .cta {
+      padding: 80px 35px;
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: radial-gradient(ellipse at 50% 0%, var(--glow), transparent 60%), #ffffff08;
+    }
+
+    .cta h2 {
+      max-width: 690px;
+      margin: 0 auto 14px;
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 24px;
+    }
+
+    .foot {
+      padding: 35px 0;
+      color: #9694a0;
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid var(--line);
+      margin-top: 70px;
+    }
+
+    /* ==========================================================================
+       12. МОДАЛЬНОЕ ОКНО ЗАЯВКИ И УВЕДОМЛЕНИЕ (TOAST)
+       ========================================================================== */
+    .modal-back {
+      position: fixed;
+      z-index: 40;
+      inset: 0;
+      background: #080912bd;
+      backdrop-filter: blur(12px);
+      display: none;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .modal-back.open {
+      display: grid;
+    }
+
+    .modal {
+      width: min(480px, 100%);
+      background: #1b1c29;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 27px;
+      position: relative;
+      box-shadow: 0 24px 100px #0008;
+    }
+
+    .modal h2 {
+      font-size: 28px;
+      margin: 0 0 8px;
+    }
+
+    .modal p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .close {
+      position: absolute;
+      right: 17px;
+      top: 15px;
+      border: 0;
+      background: #ffffff12;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 18px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+      margin: 14px 0;
+    }
+
+    .field label {
+      font-size: 11px;
+      color: #c9c6d0;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      padding: 12px 13px;
+      background: #11121c;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: white;
+      font: inherit;
+    }
+
+    .copybox {
+      font-size: 12px;
+      color: #d6d3df;
+      background: #11121c;
+      border: 1px solid var(--line);
+      padding: 14px;
+      border-radius: 12px;
+      margin: 16px 0;
+      line-height: 1.6;
+    }
+
+    .modal .btn {
+      width: 100%;
+    }
+
+    .toast {
+      position: fixed;
+      z-index: 55;
+      bottom: 22px;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      opacity: 0;
+      pointer-events: none;
+      background: #eee5d7;
+      color: #1b1720;
+      padding: 12px 17px;
+      border-radius: 99px;
+      font-size: 12px;
+      transition: 0.25s;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* ==========================================================================
+       13. АДАПТИВНАЯ ВЁРСТКА (ПЛАНШЕТЫ И СМАРТФОНЫ)
+       ========================================================================== */
+    @media (max-width: 850px) {
+      .nav {
+        display: none;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding-bottom: 42px;
+      }
+
+      .hero {
+        min-height: 900px;
+        height: auto;
+      }
+
+      .hero-card {
+        max-width: 480px;
+      }
+
+      .intro,
+      .resort,
+      .schedule {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+
+      .benefits,
+      .activities {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .evening-layout {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
+
+      .section {
+        padding: 78px 0;
+      }
+
+      .resort {
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .wrap {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .topbar {
+        top: 8px;
+        width: calc(100% - 16px);
+        padding: 8px 9px;
+      }
+
+      .mood {
+        max-width: 132px;
+        padding: 7px;
+        font-size: 10px;
+      }
+
+      .book-mini {
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+
+      .hero {
+        min-height: 870px;
+        background-position: 58% center;
+      }
+
+      .hero-inner {
+        padding: 128px 0 30px;
+      }
+
+      .hero h1 {
+        font-size: 55px;
+      }
+
+      .hero-copy {
+        font-size: 14px;
+      }
+
+      .hero-actions {
+        flex-wrap: wrap;
+      }
+
+      .hero-card {
+        padding: 18px;
+      }
+
+      .countdown {
+        gap: 6px;
+      }
+
+      .unit strong {
+        font-size: 22px;
+      }
+
+      .trip-strip {
+        align-items: flex-start;
+        gap: 12px;
+        flex-direction: column;
+      }
+
+      .benefits,
+      .activities,
+      .price-cards,
+      .includes {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 17px;
+      }
+
+      .evening-layout {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .benefit,
+      .activity {
+        padding: 16px;
+      }
+
+      .activity {
+        min-height: 190px;
+      }
+
+      .stats {
+        gap: 8px;
+      }
+
+      .stat {
+        padding: 15px;
+      }
+
+      .stat strong {
+        font-size: 28px;
+      }
+
+      .checklist {
+        grid-template-columns: 1fr;
+      }
+
+      .own-way {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .price-cards {
+        gap: 8px;
+      }
+
+      .price-card {
+        padding: 17px 13px;
+      }
+
+      .price-card .amount {
+        font-size: 24px;
+      }
+
+      .price-card h3 {
+        font-size: 15px;
+      }
+
+      .price-card p {
+        font-size: 11px;
+      }
+
+      .include-box {
+        padding: 17px;
+      }
+
+      .section h2 {
+        font-size: 38px;
+      }
+
+      .foot {
+        gap: 14px;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body data-mood="sunset">
+
+  <!-- ========================================================================
+       ШАПКА САЙТА (TOPBAR)
+       ======================================================================== -->
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="FLORA — на главную">
+      <img src="flora-logo.png" alt="FLORA">
+    </a>
+    <nav class="nav">
+      <a href="#trip">О поездке</a>
+      <a href="#program">Программа</a>
+      <a href="#price">Стоимость</a>
+    </nav>
+    <button class="book-mini" data-book>Забронировать</button>
+  </header>
+
+  <main id="top">
+
+    <!-- ======================================================================
+         1. ПЕРВЫЙ ЭКРАН (HERO) И ТАЙМЕР ОБРАТНОГО ОТСЧЁТА
+         ====================================================================== -->
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div>
+          <div class="eyebrow">FLORA trip · Кировск · сезон 26/27</div>
+          <h1>Выше<br>только <em>горы.</em></h1>
+          <p class="hero-copy">Днём — склон и горы. Вечером — вечеринки FLORA, северное сияние и выступление хора прямо на горе.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#price">Выбрать волну · от 33 900 ₽</a>
+            <a class="btn-outline" href="#trip">Узнать о поездке ↓</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <div class="card-top">
+            <span>До встречи в горах</span>
+            <span class="pill">места ограничены</span>
+          </div>
+          <div class="countdown" id="countdown">
+            <div class="unit"><strong>—</strong><small>дней</small></div>
+            <div class="unit"><strong>—</strong><small>часов</small></div>
+            <div class="unit"><strong>—</strong><small>минут</small></div>
+            <div class="unit"><strong>—</strong><small>секунд</small></div>
+          </div>
+          <div class="price-row">
+            <div>
+              <small>Первая волна</small>
+              <div class="price">33 900 ₽</div>
+            </div>
+            <button class="book-mini" data-book>Занять место</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         2. ФОТОГАЛЕРЕЯ (ХИБИНЫ В КАДРЕ)
+         ====================================================================== -->
+    <section class="section gallery-section" aria-labelledby="gallery-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Хибины в кадре</div>
+          <h2 id="gallery-title">Дни в снегу. Ночи под северным небом.</h2>
+          <p class="lead">Пять настроений поездки — от первого света на склоне до огней Кировска и северного сияния.</p>
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img src="photos/aurora.jpg" alt="Северное сияние над заснеженным склоном и огнями долины" loading="lazy">
+            <figcaption>
+              <strong>Северное сияние</strong>
+              <span>Попробуем поймать его вместе — всё зависит от погоды и неба.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="photos/evening-slope.jpg" alt="Подъёмник и заснеженный склон на закате" loading="lazy">
+            <figcaption>
+              <strong>Последний спуск</strong>
+              <span>Горный вечер в огнях — и впереди ещё целая ночь.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="photos/kirovsk-twilight.jpg" alt="Кировск в сумерках под розовым небом" loading="lazy">
+            <figcaption>
+              <strong>Кировск в сумерках</strong>
+              <span>Когда в долине зажигаются огни, наша программа продолжается.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="photos/plateau-dusk.jpg" alt="Панорамный комплекс на горе в зимних сумерках" loading="lazy">
+            <figcaption>
+              <strong>Плато на закате</strong>
+              <span>Горная панорама и мягкий свет над долиной.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="photos/sunrise.jpg" alt="Сноубордист встречает рассвет над зимними горами" loading="lazy">
+            <figcaption>
+              <strong>Первый свет</strong>
+              <span>Тишина, снег и рассвет над Хибинами.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. ВЕЧЕРА FLORA (ВЫДЕЛЕННЫЙ БЛОК)
+         ====================================================================== -->
+    <section class="section evening-section">
+      <div class="wrap evening-layout">
+        <div>
+          <div class="kicker">После склонов — вместе</div>
+          <h2>Вечера FLORA<br>запомнятся отдельно.</h2>
+        </div>
+        <div class="evening-copy">
+          <p class="evening-lead">Нас ждут вечеринки и музыкальные мастер-классы с резидентами FLORA, а ещё — выступление хора прямо на горе.</p>
+          <p>Будем ловить северное сияние, если сложатся погодные условия, встречаться, слушать музыку и проживать Хибины не только днём. Подробное расписание вечеров расскажем позже.</p>
+          <a class="btn-outline" href="#program">Смотреть программу ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. О ПОЕЗДКЕ, ПРЕИМУЩЕСТВА И КУРОРТ BIGWOOD
+         ====================================================================== -->
+    <section class="section" id="trip">
+      <div class="wrap">
+        <div class="intro">
+          <div class="section-head">
+            <div class="kicker">Не просто поездка</div>
+            <h2>Север, который останется с тобой.</h2>
+            <p class="lead">Пять дней в Кировске: катаемся, исследуем Хибины и собираемся на вечера FLORA — с музыкой, вечеринками и выступлением хора на горе.</p>
+          </div>
+
+          <div class="theses">
+            <div class="thesis">
+              <div class="num">01</div>
+              <p>Едем одной компанией FLORA — знакомиться, смеяться и разделять впечатления.</p>
+            </div>
+            <div class="thesis">
+              <div class="num">02</div>
+              <p>Днём — горы и снег. Вечером — вечеринки FLORA, музыкальные мастер-классы и выступление хора на горе.</p>
+            </div>
+            <div class="thesis">
+              <div class="num">03</div>
+              <p>Можно ехать с нами из Петербурга или добраться самостоятельно — подскажем варианты.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="benefits">
+          <article class="benefit">
+            <div class="icon">01</div>
+            <h3>Хибины рядом</h3>
+            <p>Кировск и горы — в центре зимнего маршрута.</p>
+          </article>
+          <article class="benefit">
+            <div class="icon">02</div>
+            <h3>Уже всё собрано</h3>
+            <p>Проживание, завтраки и дорога туда и обратно включены.</p>
+          </article>
+          <article class="benefit">
+            <div class="icon">03</div>
+            <h3>Своя атмосфера</h3>
+            <p>Вечеринки и музыкальные мастер-классы с резидентами FLORA.</p>
+          </article>
+          <article class="benefit">
+            <div class="icon">04</div>
+            <h3>Северное небо</h3>
+            <p>Оставим место для спонтанных планов и охоты за сиянием.</p>
+          </article>
+        </div>
+
+        <!-- Курорт Большой Вудъявр / BigWood -->
+        <div class="section-head" style="margin-top:90px">
+          <div class="kicker">Куда отправляемся</div>
+          <h2>Большой Вудъявр / BigWood</h2>
+          <p class="lead">Горнолыжный курорт в Кировске — горные панорамы, длинный сезон и трассы для разного уровня катания.</p>
+        </div>
+
+        <div class="trip-strip">
+          <div>
+            <div class="trip-tag">Наши даты</div>
+            <div class="trip-date">24 – 29 января 2027</div>
+          </div>
+          <div class="pill">Сезон 26/27</div>
+        </div>
+
+        <div class="resort">
+          <div>
+            <div class="stats">
+              <div class="stat"><strong>35 км</strong><span>трасс</span></div>
+              <div class="stat"><strong>1060 м</strong><span>высота вершины</span></div>
+              <div class="stat"><strong>10</strong><span>подъёмников</span></div>
+              <div class="stat"><strong>28</strong><span>трасс</span></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="kicker">Быт и дорога</div>
+            <h2>Тебе останется<br>выбрать темп.</h2>
+            <div class="tabs">
+              <button class="tab active" data-tab="stay">Проживание и завтраки</button>
+              <button class="tab" data-tab="transfer">Трансфер из СПб и обратно</button>
+            </div>
+            <div class="tab-panel" id="tab-panel">
+              <h3>Отдых между склонами</h3>
+              <p>Проживание и завтраки включены в стоимость. Детали размещения и адрес сообщим участникам поездки.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. ПРОГРАММА, АКТИВНОСТИ И РАСПИСАНИЕ ПО ДНЯМ
+         ====================================================================== -->
+    <section class="section" id="program" style="padding-top:30px">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Впечатления</div>
+          <h2>Днём — горы. Вечером — FLORA.</h2>
+          <p class="lead">Главное уже в программе: вечеринки FLORA, музыкальные мастер-классы и выступление хора прямо на горе. Детальное расписание сообщим позже.</p>
+        </div>
+
+        <div class="activities">
+          <article class="activity">
+            <div class="icon">01</div>
+            <h3>Хор прямо на горе</h3>
+            <p>Особенное выступление среди заснеженных вершин — один из главных моментов поездки.</p>
+          </article>
+          <article class="activity">
+            <div class="icon">02</div>
+            <h3>Вечеринки FLORA</h3>
+            <p>Музыка, танцы и мастер-классы с резидентами FLORA после дня на склоне.</p>
+          </article>
+          <article class="activity">
+            <div class="icon">03</div>
+            <h3>Северное сияние</h3>
+            <p>Будем следить за небом и выбираться на поиски, если позволят погода и условия.</p>
+          </article>
+          <article class="activity">
+            <div class="icon">04</div>
+            <h3>«Плато» и BigWood</h3>
+            <p>Панорамные виды, горнолыжные склоны и время для своих открытий.</p>
+          </article>
+        </div>
+
+        <div class="schedule" style="margin-top:80px">
+          <div>
+            <div class="kicker">Предварительный план</div>
+            <h2>Дни в Хибинах</h2>
+            <p class="lead">Точное расписание, активности и время отправления уточним позже.</p>
+          </div>
+
+          <div class="day-list">
+            <div class="day open">
+              <button><strong>24 января · воскресенье</strong><span>Выезд из Петербурга +</span></button>
+              <div class="day-detail">Отправляемся из Санкт-Петербурга. Время и место сбора сообщим участникам отдельно.</div>
+            </div>
+            <div class="day">
+              <button><strong>25 января · понедельник</strong><span>Прибытие в Кировск +</span></button>
+              <div class="day-detail">Уже будем в Кировске: заселение, знакомство с городом и свободное время.</div>
+            </div>
+            <div class="day">
+              <button><strong>26–27 января</strong><span>Горы и программа +</span></button>
+              <div class="day-detail">Дни для катания, активностей и программы FLORA. Наполнение каждого дня сообщим позже.</div>
+            </div>
+            <div class="day">
+              <button><strong>28 января · четверг</strong><span>Выезд домой +</span></button>
+              <div class="day-detail">Выезжаем из Кировска обратно в Петербург.</div>
+            </div>
+            <div class="day">
+              <button><strong>29 января · пятница</strong><span>Прибытие в Петербург +</span></button>
+              <div class="day-detail">Возвращаемся в Санкт-Петербург.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         6. ЧЕК-ЛИСТ В ДОРОГУ
+         ====================================================================== -->
+    <section class="section" style="padding-top:25px">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Собираем чемодан</div>
+          <h2>Чек-лист в дорогу.</h2>
+          <p class="lead">Отмечай собранное — список сохранится в этом браузере.</p>
+        </div>
+
+        <div class="checklist" id="checklist">
+          <label class="check"><input type="checkbox"> Тёплые слои и термобельё</label>
+          <label class="check"><input type="checkbox"> Непромокаемая верхняя одежда</label>
+          <label class="check"><input type="checkbox"> Перчатки, бафф и тёплая шапка</label>
+          <label class="check"><input type="checkbox"> Удобная зимняя обувь</label>
+          <label class="check"><input type="checkbox"> Солнцезащитные очки и крем</label>
+          <label class="check"><input type="checkbox"> Паспорт и документы</label>
+          <label class="check"><input type="checkbox"> Зарядка и пауэрбанк</label>
+          <label class="check"><input type="checkbox"> Лыжное снаряжение — если есть</label>
+        </div>
+
+        <div class="progress">Собрано: <b id="progress">0 из 8</b></div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         7. СТОИМОСТЬ, ВОЛНЫ БРОНИРОВАНИЯ И ЧТО ВХОДИТ
+         ====================================================================== -->
+    <section class="section pricing" id="price">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Бронирование открыто</div>
+          <h2>Чем раньше —<br>тем ниже цена.</h2>
+          <p class="lead">Стоимость растёт по мере заполнения мест. Количество мест на каждом этапе ограничено. Максимальный размер группы — 45 человек.</p>
+        </div>
+
+        <div class="price-cards">
+          <article class="price-card current">
+            <div class="wave">Первая волна</div>
+            <h3>Первые 12 мест</h3>
+            <div class="amount">33 900 ₽</div>
+            <p>Самая низкая цена поездки.</p>
+            <button class="book-mini" style="margin-top:20px" data-book>Забронировать</button>
+          </article>
+
+          <article class="price-card">
+            <div class="wave">Вторая волна</div>
+            <h3>Следующие 16 мест</h3>
+            <div class="amount">36 900 ₽</div>
+            <p>Цена изменится после заполнения первой волны.</p>
+          </article>
+
+          <article class="price-card">
+            <div class="wave">Третья волна</div>
+            <h3>Последние 8 мест</h3>
+            <div class="amount">42 900 ₽</div>
+            <p>Финальная указанная волна бронирования.</p>
+          </article>
+        </div>
+
+        <div class="own-way">
+          <div>
+            <h3>Хочешь добраться своим ходом?</h3>
+            <p>Напиши нам — сориентируем по стоимости и деталям самостоятельной дороги.</p>
+          </div>
+          <button class="btn-outline" data-book>Уточнить варианты</button>
+        </div>
+
+        <div class="includes">
+          <div class="include-box">
+            <h3>В стоимости</h3>
+            <ul>
+              <li>Дорога туда и обратно</li>
+              <li>Проживание</li>
+              <li>Завтраки</li>
+              <li>Развлекательная программа FLORA</li>
+            </ul>
+          </div>
+
+          <div class="include-box">
+            <h3>Оплачивается отдельно</h3>
+            <ul>
+              <li>Ски-пассы</li>
+              <li>Питание, кроме завтраков</li>
+              <li>Активности и личные расходы</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         8. ФИНАЛЬНЫЙ ПРИЗЫВ (CTA) И ФУТЕР
+         ====================================================================== -->
+    <section class="section" style="padding-top:12px">
+      <div class="wrap">
+        <div class="cta">
+          <div class="kicker">Предоплата 100%</div>
+          <h2>Поехали за зимой?</h2>
+          <p>Чтобы забронировать место по текущей цене, напиши организатору в личные сообщения. Сформируем готовый текст заявки, который можно скопировать.</p>
+          <button class="btn" data-book>Собрать заявку</button>
+        </div>
+
+        <footer class="foot">
+          <span>FLORA · Хибины, 24–29 января 2027</span>
+          <span>Программа и детали могут уточняться организаторами.</span>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       9. МОДАЛЬНОЕ ОКНО ЗАЯВКИ И ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ
+       ======================================================================== -->
+  <div class="modal-back" id="modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="close" id="close" aria-label="Закрыть">×</button>
+      <div class="kicker">FLORA trip · Хибины</div>
+      <h2 id="modal-title">Оставить заявку</h2>
+      <p>Бронирование подтверждается после 100% предоплаты. Скопируй сообщение и отправь организатору в личные сообщения.</p>
+
+      <div class="field">
+        <label for="name">Как тебя зовут?</label>
+        <input id="name" placeholder="Имя">
+      </div>
+
+      <div class="field">
+        <label for="travel">Как планируешь ехать?</label>
+        <select id="travel">
+          <option>С группой из Санкт-Петербурга</option>
+          <option>Своим ходом — хочу узнать стоимость</option>
+        </select>
+      </div>
+
+      <div class="copybox" id="request-text">
+        Привет! Хочу забронировать место в поездке FLORA в Хибины 24–29 января 2027. Подскажи, пожалуйста, актуальную цену и детали оплаты.
+      </div>
+
+      <button class="btn" id="copy">Скопировать заявку</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Заявка скопирована</div>
+
+  <!-- ========================================================================
+       10. СКРИПТЫ ИНТЕРАКТИВНОСТИ
+       ======================================================================== -->
+  <script>
+    // 1. Таймер обратного отсчёта до 24 января 2027 (22:00 МСК)
+    const target = new Date('2027-01-24T22:00:00+03:00');
+    const countdownEl = document.querySelector('#countdown');
+
+    function tick() {
+      const diff = Math.max(0, target - Date.now());
+      const vals = [
+        Math.floor(diff / 86400000),
+        Math.floor(diff / 3600000) % 24,
+        Math.floor(diff / 60000) % 60,
+        Math.floor(diff / 1000) % 60
+      ];
+      const labels = ['дней', 'часов', 'минут', 'секунд'];
+
+      countdownEl.innerHTML = vals
+        .map((v, i) => `<div class="unit"><strong>${String(v).padStart(2, '0')}</strong><small>${labels[i]}</small></div>`)
+        .join('');
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // 2. Вкладки «Проживание и завтраки» / «Трансфер»
+    const tabPanel = document.querySelector('#tab-panel');
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+
+        if (btn.dataset.tab === 'stay') {
+          tabPanel.innerHTML = '<h3>Отдых между склонами</h3><p>Проживание и завтраки включены в стоимость. Детали размещения и адрес сообщим участникам поездки.</p>';
+        } else {
+          tabPanel.innerHTML = '<h3>Дорога из Петербурга и обратно</h3><p>Групповая дорога из Санкт-Петербурга в Кировск и обратно включена. Выезд 24 января, обратный выезд 28 января. Время и место сбора уточним отдельно.</p>';
+        }
+      });
+    });
+
+    // 3. Аккордеон расписания по дням
+    document.querySelectorAll('.day button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.parentElement.classList.toggle('open');
+      });
+    });
+
+    // 4. Чек-лист снаряжения с сохранением в localStorage
+    const checks = [...document.querySelectorAll('#checklist input')];
+    const progressEl = document.querySelector('#progress');
+
+    function updateProgress() {
+      const done = checks.filter(c => c.checked).length;
+      progressEl.textContent = `${done} из ${checks.length}`;
+    }
+
+    checks.forEach((checkbox, i) => {
+      checkbox.checked = localStorage.getItem('flora-check-' + i) === '1';
+      checkbox.addEventListener('change', () => {
+        localStorage.setItem('flora-check-' + i, checkbox.checked ? '1' : '0');
+        updateProgress();
+      });
+    });
+    updateProgress();
+
+    // 5. Модальное окно заявки и копирование текста
+    const modal = document.querySelector('#modal');
+    const nameInput = document.querySelector('#name');
+    const travelSelect = document.querySelector('#travel');
+    const requestText = document.querySelector('#request-text');
+    const toast = document.querySelector('#toast');
+
+    function updateText() {
+      const name = nameInput.value.trim();
+      const travel = travelSelect.value;
+      const travelPart = travel === 'Своим ходом — хочу узнать стоимость'
+        ? 'Планирую добраться своим ходом — подскажи, пожалуйста, стоимость и детали.'
+        : 'Планирую ехать с группой из Санкт-Петербурга.';
+
+      requestText.textContent = `Привет! ${name ? `Меня зовут ${name}. ` : ''}Хочу забронировать место в поездке FLORA в Хибины 24–29 января 2027. ${travelPart} Подскажи, пожалуйста, актуальную цену и детали оплаты.`;
+    }
+
+    document.querySelectorAll('[data-book]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        modal.classList.add('open');
+        updateText();
+      });
+    });
+
+    document.querySelector('#close').addEventListener('click', () => {
+      modal.classList.remove('open');
+    });
+
+    modal.addEventListener('click', e => {
+      if (e.target === modal) modal.classList.remove('open');
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') modal.classList.remove('open');
+    });
+
+    nameInput.addEventListener('input', updateText);
+    travelSelect.addEventListener('change', updateText);
+
+    document.querySelector('#copy').addEventListener('click', async () => {
+      updateText();
+      try {
+        await navigator.clipboard.writeText(requestText.textContent);
+      } catch (e) {
+        const range = document.createRange();
+        range.selectNodeContents(requestText);
+        const selection = getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    });
+  </script>
+
+</body>
+</html>
